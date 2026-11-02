@@ -18,7 +18,7 @@ Các trạng thái và số liệu được đồng bộ dưới `traffic_status
 
 ## 2. Cài đặt ban đầu
 
-### 2.1. Ứng dụng desktop
+### 2.1. Ứng dụng Desktop
 
 Yêu cầu: Windows, Python 3.10 trở lên, kết nối Internet để cài thư viện và tải các thành phần mô hình lần đầu. Tkinter thường có sẵn trong bộ cài Python cho Windows.
 
@@ -85,7 +85,7 @@ Desktop dùng Firebase Admin SDK với khóa tài khoản dịch vụ. Android d
    }
    ```
 
-Ứng dụng desktop ghi dữ liệu JSON theo cấu trúc:
+Ứng dụng Desktop ghi dữ liệu JSON theo cấu trúc:
 
 ```json
 {
@@ -102,13 +102,13 @@ Desktop dùng Firebase Admin SDK với khóa tài khoản dịch vụ. Android d
 }
 ```
 
-`timestamp` là thời gian Unix tính bằng mili giây. Các trường `roi_count` và `stuck_count` được desktop ghi dưới dạng chuỗi.
+`timestamp` là thời gian Unix tính bằng mili giây. Các trường `roi_count` và `stuck_count` được Desktop ghi dưới dạng chuỗi.
 
-### 3.2. Cấu hình Firebase cho desktop
+### 3.2. Cấu hình Firebase cho Desktop
 
 1. Trong Firebase Console, mở **Project settings → Service accounts** và tạo khóa riêng tư JSON cho Firebase Admin SDK.
-2. Lưu khóa JSON ở vị trí an toàn trên máy chạy ứng dụng desktop. Không đưa khóa này vào Git, không gửi khóa vào ứng dụng Android và không chia sẻ công khai.
-3. Khởi chạy desktop, mở phần cấu hình Firebase, chọn **File Key Firebase (JSON)** và trỏ đến khóa vừa tải.
+2. Lưu khóa JSON ở vị trí an toàn trên máy chạy ứng dụng Desktop. Không đưa khóa này vào Git, không gửi khóa vào ứng dụng Android và không chia sẻ công khai.
+3. Khởi chạy ứng dụng Desktop, mở phần cấu hình Firebase, chọn **File Key Firebase (JSON)** và trỏ đến khóa vừa tải.
 4. Nhập **Database URL** đã sao chép ở mục 3.1, sau đó nhấn **Kết nối Firebase**. Giao diện báo kết nối thành công khi khởi tạo được Admin SDK.
 5. Cấu hình kết nối được ghi vào `firebase_config.json` để dùng lại ở lần chạy sau. Hãy bảo vệ tệp này vì nó lưu đường dẫn khóa và URL database; không commit tệp hoặc khóa tài khoản dịch vụ vào repository.
 
@@ -147,20 +147,20 @@ Kết quả phụ thuộc vào góc đặt camera, chất lượng hình ảnh, 
 
 ### Android
 
-1. Mở ứng dụng khi desktop đang chạy và đã kết nối Firebase. Danh sách hiển thị các camera đang cập nhật dữ liệu.
+1. Mở ứng dụng khi ứng dụng Desktop đang chạy và đã kết nối Firebase. Danh sách hiển thị các camera đang cập nhật dữ liệu.
 2. Chạm vào thẻ camera để xem trạng thái, số xe trong khu vực, số xe bị kẹt và thời điểm cập nhật. Có thể tìm theo mã hoặc tên khu vực.
 3. Đánh dấu checkbox trên từng camera để chọn khu vực muốn nhận cảnh báo.
 4. Bật công tắc **Trạng thái nhận cảnh báo** để nhận thông báo từ các camera đã chọn; tắt công tắc để dừng nhận. Lựa chọn được lưu trên thiết bị.
 5. Cho phép quyền thông báo trong cài đặt Android nếu đã từ chối quyền lúc khởi động.
 
-Thông báo FCM chỉ được hiển thị khi công tắc đang bật, camera tương ứng được chọn và trạng thái gửi về là tắc nghẽn. Ứng dụng áp dụng cooldown 60 giây cho từng địa điểm; desktop cũng có khoảng nghỉ gửi cảnh báo 60 giây.
+Thông báo FCM chỉ được hiển thị khi công tắc đang bật, camera tương ứng được chọn và trạng thái gửi về là tắc nghẽn. Ứng dụng áp dụng cooldown 60 giây cho từng địa điểm; ứng dụng Desktop cũng có khoảng nghỉ gửi cảnh báo 60 giây.
 
 ---
 
 ## 5. Khắc phục sự cố
 
 - **Không nạp được mô hình**: xác nhận `model.pt` nằm cạnh `app.py` và chạy ứng dụng từ thư mục `main`.
-- **Desktop không kết nối Firebase**: kiểm tra đường dẫn khóa JSON, quyền đọc tệp, Database URL và kết nối Internet; xem thông báo lỗi trên cửa sổ hoặc terminal.
-- **Android không hiện camera**: xác nhận `google-services.json` thuộc đúng project và package name, `FIREBASE_DATABASE_URL` chính xác, desktop đang gửi dữ liệu và Realtime Database rules cho phép ứng dụng đọc.
+- **Ứng dụng Desktop không kết nối Firebase**: kiểm tra đường dẫn khóa JSON, quyền đọc tệp, Database URL và kết nối Internet; xem thông báo lỗi trên cửa sổ hoặc terminal.
+- **Android không hiện camera**: xác nhận `google-services.json` thuộc đúng project và package name, `FIREBASE_DATABASE_URL` chính xác, ứng dụng Desktop đang gửi dữ liệu và Realtime Database rules cho phép ứng dụng Android đọc.
 - **Không nhận thông báo**: kiểm tra quyền thông báo, công tắc tổng, checkbox của camera, FCM đã được bật trong Firebase project và thiết bị có Google Play services. Khi thử liên tiếp, chờ hết cooldown 60 giây.
-- **Camera biến mất khỏi danh sách**: Android lọc dữ liệu cũ hơn 15 giây; kiểm tra desktop còn xử lý nguồn video/camera và kết nối Firebase.
+- **Camera biến mất khỏi danh sách**: Android lọc dữ liệu cũ hơn 15 giây; kiểm tra ứng dụng Desktop còn xử lý nguồn video/camera và kết nối Firebase.
