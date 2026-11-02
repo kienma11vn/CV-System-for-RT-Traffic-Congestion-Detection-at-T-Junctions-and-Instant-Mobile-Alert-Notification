@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "123456789012",
+    "project_id": "your-firebase-project-id",
+    "storage_bucket": "your-firebase-project-id.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123456789012:android:a1b2c3d4e5f67890123456",
+        "android_client_info": {
+          "package_name": "com.example.trafficjamalert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyYourActualApiKeyGoesHere12345"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
